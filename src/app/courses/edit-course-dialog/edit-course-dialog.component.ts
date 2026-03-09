@@ -1,11 +1,10 @@
 
 import {Component, inject, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { CourseInterface} from '../model/course';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup,  Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {CoursesHttpService} from '../services/courses-http.service';
-import { MatInputModule } from '@angular/material/input';
 import { MATERIAL_MODULES } from '../course.mat';
 import { AsyncPipe } from '@angular/common';
 
