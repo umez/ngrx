@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "server": "ts-node -P ./server/server.tsconfig.json ./server/server.ts",
+     "start": "ng serve  --proxy-config ./proxy.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -23,13 +24,22 @@
   "private": true,
   "packageManager": "npm@10.9.0",
   "dependencies": {
+    "@angular/cdk": "^21.2.1",
     "@angular/common": "^21.1.0",
     "@angular/compiler": "^21.1.0",
     "@angular/core": "^21.1.0",
     "@angular/forms": "^21.1.0",
+    "@angular/material": "^21.2.1",
     "@angular/platform-browser": "^21.1.0",
     "@angular/router": "^21.1.0",
+    "@ngrx/entity": "^21.0.1",
+    "@ngrx/store": "^21.0.1",
+    "@types/express": "^5.0.6",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
     "rxjs": "~7.8.0",
+
     "tslib": "^2.3.0"
   },
   "devDependencies": {
@@ -38,6 +48,7 @@
     "@angular/compiler-cli": "^21.1.0",
     "jsdom": "^27.1.0",
     "typescript": "~5.9.2",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.8",
+    "ts-node": "^10.9.2"
   }
 }
