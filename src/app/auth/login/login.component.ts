@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 import { AuthService } from '../auth.service';
 import { LoginAction } from '../store/users.actions';
 import { MATERIAL_MODULES } from '../../courses/course.mat';
+import { selectIsLoggedIn } from '../store/users.selectors';
 
 @Component({
     selector: 'login',
@@ -17,7 +18,7 @@ import { MATERIAL_MODULES } from '../../courses/course.mat';
     imports: [MATERIAL_MODULES],
     providers: [AuthService]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent  {
 
   form: FormGroup;
 
@@ -34,10 +35,6 @@ export class LoginComponent implements OnInit {
           email: ['test@angular-university.io', [Validators.required]],
           password: ['test', [Validators.required]]
       });
-
-  }
-
-  ngOnInit() {
 
   }
 

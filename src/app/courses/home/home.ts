@@ -9,6 +9,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { MatDialog } from '@angular/material/dialog';
 import { CoursesHttpService } from '../services/courses-http.service';
 import { CourseCardList } from '../course-card-list/course-card-list';
+import { select, Store } from '@ngrx/store';
+import { selectAdvancedCourses, selectAllCourses, selectBeginnerCourses, selectPromoTotal } from '../store/courses.selectors';
 
 @Component({
   selector: 'app-home',
@@ -21,15 +23,15 @@ export class Home {
 
   promoTotal$!: Observable<number>;
 
-    loading$!: Observable<boolean>;
-
     beginnerCourses$!: Observable<CourseInterface[]>;
 
     advancedCourses$!: Observable<CourseInterface[]>;
 
     dialog = inject(MatDialog);
 
-    coursesHttpService = inject(CoursesHttpService); // CoursesHttpService
+    // coursesHttpService = inject(CoursesHttpService); // CoursesHttpService
+
+    store = inject(Store);
 
 
     ngOnInit() {
@@ -38,29 +40,17 @@ export class Home {
 
   reload() {
 
-    const courses$ = this.coursesHttpService.findAllCourses()
+    const courses$ = this.store.select(selectAllCourses)
       .pipe(
         map((courses:any) => courses.sort(compareCourses)),
         shareReplay()
       );
 
-    this.loading$ = courses$.pipe(map(courses => !!courses));
+    this.beginnerCourses$ = this.store.pipe(select(selectBeginnerCourses));
 
-    this.beginnerCourses$ = courses$
-      .pipe(
-        map((courses:any) => courses.filter((course:any) => course.category == 'BEGINNER'))
-      );
+    this.advancedCourses$ = this.store.pipe(select(selectAdvancedCourses));
 
-
-    this.advancedCourses$ = courses$
-      .pipe(
-        map((courses:any) => courses.filter((course:any) => course.category == 'ADVANCED'))
-      );
-
-    this.promoTotal$ = courses$
-        .pipe(
-            map((courses:any) => courses.filter((course:any) => course.promo).length)
-        );
+    this.promoTotal$ = this.store.pipe(select(selectPromoTotal));
 
   }
 

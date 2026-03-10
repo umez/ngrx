@@ -8,7 +8,9 @@ import {map} from "rxjs/operators";
 import {Lesson} from "../model/lesson";
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CoursesHttpService {
 
     constructor(private http:HttpClient) {
